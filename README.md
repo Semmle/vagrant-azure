@@ -118,6 +118,7 @@ The vagrant-azure provide exposes Azure specific configuration options:
 * `vm_password`: (Optional for *nix) Password for the VM -- This is not recommended for *nix deployments
 * `vm_size`: VM size to be used -- defaults to 'Standard_DS2_v2'. See sizes for [*nix](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-sizes/), [Windows](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-sizes/).
 * `admin_username`: The root/administrator username for the VM
+* `custom_data`: (Optional) Custom data to apply to the VM.
 
 ### Optional VM Image Parameters
 `vm_image_urn`, `vm_vhd_uri`, and `vm_managed_image_id` are mutually exclusive. They should not be used in combination.

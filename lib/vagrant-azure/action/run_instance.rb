@@ -57,6 +57,7 @@ module VagrantPlugins
           winrm_install_self_signed_cert = config.winrm_install_self_signed_cert
           dns_label_prefix               = config.dns_name
           nsg_label_prefix               = config.nsg_name
+          custom_data                    = config.custom_data
 
           # Launch!
           env[:ui].info(I18n.t('vagrant_azure.launching_instance'))
@@ -85,6 +86,10 @@ module VagrantPlugins
           env[:ui].info(" -- TCP Endpoints: #{tcp_endpoints}") if tcp_endpoints
           env[:ui].info(" -- Availability Set Name: #{availability_set_name}") if availability_set_name
           env[:ui].info(" -- DNS Label Prefix: #{dns_label_prefix}")
+
+          if !custom_data.nil?
+            env[:ui].info(" -- Custom Data: #{custom_data}")
+          end
 
           image_publisher, image_offer, image_sku, image_version = vm_image_urn.split(":")
 
@@ -125,7 +130,8 @@ module VagrantPlugins
             vhd_uri:                        vm_vhd_uri,
             vm_managed_image_id:            vm_managed_image_id,
             operating_system:               operating_system,
-            data_disks:                     config.data_disks
+            data_disks:                     config.data_disks,
+            custom_data:                    custom_data,
           }
 
           if operating_system != "Windows"

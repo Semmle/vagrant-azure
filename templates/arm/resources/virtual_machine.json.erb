@@ -31,6 +31,9 @@
         }
       }
       <% end %>
+      <% unless custom_data.nil? %>,
+      "customData": "<%= custom_data %>"
+      <% end %>
     },
     "storageProfile": {
       <% if vhd_uri.nil? && vm_managed_image_id.nil? %>

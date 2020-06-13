@@ -186,6 +186,11 @@ module VagrantPlugins
       # @return [String]
       attr_accessor :wait_for_destroy
 
+      # (Optional) Custom data to be used when creating the instance. Should be a Base-64 encoded string.
+      #
+      # @return [String]
+      attr_accessor :custom_data
+
 
       def initialize
         @tenant_id = UNSET_VALUE
@@ -219,6 +224,7 @@ module VagrantPlugins
         @winrm_install_self_signed_cert = UNSET_VALUE
         @deployment_template = UNSET_VALUE
         @wait_for_destroy = UNSET_VALUE
+        @custom_data = UNSET_VALUE
       end
 
       def finalize!
@@ -257,6 +263,7 @@ module VagrantPlugins
         @admin_password = (ENV['AZURE_VM_ADMIN_PASSWORD'] || '$Vagrant(0)') if @admin_password == UNSET_VALUE
         @winrm_install_self_signed_cert = true if @winrm_install_self_signed_cert == UNSET_VALUE
         @wait_for_destroy = false if @wait_for_destroy == UNSET_VALUE
+        @custom_data = nil if @custom_data == UNSET_VALUE
       end
 
       def validate(machine)
