@@ -162,8 +162,8 @@ override.data_disks = [
 ### Optional Azure Parameters
 * `endpoint`: (Optional) The Azure Management API endpoint -- default `ENV['AZURE_MANAGEMENT_ENDPOINT']` if exists, falls back to <https://management.azure.com>.
 * `resource_group_name`: (Optional) Name of the resource group to use.
+* `resource_group_tags`: (Optional) Tags to tag the resource group with.
 * `location`: (Optional) Azure location to build the VM -- defaults to `westus`
 
 ## [Extended Documentation](./docs/)
 For more information on common scenarios and other features visit the [extended documentation](./docs/).
-

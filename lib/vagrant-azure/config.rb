@@ -35,6 +35,11 @@ module VagrantPlugins
       # @return [String]
       attr_accessor :resource_group_name
 
+      # (Optional) Tags to tag the resource group with.
+      #
+      # @return [Hash[String, String]]
+      attr_accessor :resource_group_tags
+
       # (Optional) Azure location to build the VM -- defaults to 'westus'
       #
       # @return [String]
@@ -189,6 +194,7 @@ module VagrantPlugins
         @endpoint = UNSET_VALUE
         @subscription_id = UNSET_VALUE
         @resource_group_name = UNSET_VALUE
+        @resource_group_tags = UNSET_VALUE
         @location = UNSET_VALUE
         @vm_name = UNSET_VALUE
         @vm_password = UNSET_VALUE
@@ -224,6 +230,7 @@ module VagrantPlugins
 
 
         @resource_group_name = Haikunator.haikunate(100) if @resource_group_name == UNSET_VALUE
+        @resource_group_tags = nil if @resource_group_tags == UNSET_VALUE
         @vm_name = Haikunator.haikunate(100) if @vm_name == UNSET_VALUE
         @vm_size = 'Standard_DS2_v2' if @vm_size == UNSET_VALUE
         @vm_password = nil if @vm_password == UNSET_VALUE

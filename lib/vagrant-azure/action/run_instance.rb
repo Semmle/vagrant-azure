@@ -37,6 +37,7 @@ module VagrantPlugins
 
           endpoint                       = config.endpoint
           resource_group_name            = config.resource_group_name
+          resource_group_tags            = config.resource_group_tags
           location                       = config.location
           ssh_user_name                  = machine.config.ssh.username
           vm_name                        = config.vm_name
@@ -62,6 +63,7 @@ module VagrantPlugins
           env[:ui].info(" -- Management Endpoint: #{endpoint}")
           env[:ui].info(" -- Subscription Id: #{config.subscription_id}")
           env[:ui].info(" -- Resource Group Name: #{resource_group_name}")
+          env[:ui].info(" -- Resource Group Tags: #{resource_group_tags}")
           env[:ui].info(" -- Location: #{location}")
           env[:ui].info(" -- SSH User Name: #{ssh_user_name}") if ssh_user_name
           env[:ui].info(" -- Admin Username: #{admin_user_name}") if admin_user_name
@@ -155,7 +157,7 @@ module VagrantPlugins
 
           env[:ui].info(" -- Create or Update of Resource Group: #{resource_group_name}")
           env[:metrics]["put_resource_group"] = Util::Timer.time do
-            put_resource_group(azure, resource_group_name, location)
+            put_resource_group(azure, resource_group_name, resource_group_tags, location)
           end
           @logger.info("Time to create resource group: #{env[:metrics]['put_resource_group']}")
 
@@ -252,8 +254,9 @@ module VagrantPlugins
           azure.resources.deployments.create_or_update(rg_name, deployment_name, params)
         end
 
-        def put_resource_group(azure, name, location)
+        def put_resource_group(azure, name, tags, location)
           params = ::Azure::ARM::Resources::Models::ResourceGroup.new.tap do |rg|
+            rg.tags = tags
             rg.location = location
           end
 
