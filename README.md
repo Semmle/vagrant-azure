@@ -119,6 +119,7 @@ The vagrant-azure provide exposes Azure specific configuration options:
 * `vm_size`: VM size to be used -- defaults to 'Standard_DS2_v2'. See sizes for [*nix](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-sizes/), [Windows](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-sizes/).
 * `admin_username`: The root/administrator username for the VM
 * `custom_data`: (Optional) Custom data to apply to the VM.
+* `allowed_inbound_ip_addresses`: (Optional) An IP address or address range to be allowed to connect to the instance.
 
 ### Optional VM Image Parameters
 `vm_image_urn`, `vm_vhd_uri`, and `vm_managed_image_id` are mutually exclusive. They should not be used in combination.

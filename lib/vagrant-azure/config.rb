@@ -191,6 +191,11 @@ module VagrantPlugins
       # @return [String]
       attr_accessor :custom_data
 
+      # (Optional) An IP address or address range to be allowed to connect to the instance. If not specified, connections are allowed from all addresses.
+      #
+      # @return [String]
+      attr_accessor :allowed_inbound_ip_addresses
+
 
       def initialize
         @tenant_id = UNSET_VALUE
@@ -225,6 +230,7 @@ module VagrantPlugins
         @deployment_template = UNSET_VALUE
         @wait_for_destroy = UNSET_VALUE
         @custom_data = UNSET_VALUE
+        @allowed_inbound_ip_addresses = UNSET_VALUE
       end
 
       def finalize!
@@ -264,6 +270,7 @@ module VagrantPlugins
         @winrm_install_self_signed_cert = true if @winrm_install_self_signed_cert == UNSET_VALUE
         @wait_for_destroy = false if @wait_for_destroy == UNSET_VALUE
         @custom_data = nil if @custom_data == UNSET_VALUE
+        @allowed_inbound_ip_addresses = nil if @allowed_inbound_ip_addresses == UNSET_VALUE
       end
 
       def validate(machine)

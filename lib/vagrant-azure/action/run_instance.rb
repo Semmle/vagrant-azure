@@ -58,6 +58,7 @@ module VagrantPlugins
           dns_label_prefix               = config.dns_name
           nsg_label_prefix               = config.nsg_name
           custom_data                    = config.custom_data
+          allowed_inbound_ip_addresses   = config.allowed_inbound_ip_addresses
 
           # Launch!
           env[:ui].info(I18n.t('vagrant_azure.launching_instance'))
@@ -89,6 +90,10 @@ module VagrantPlugins
 
           if !custom_data.nil?
             env[:ui].info(" -- Custom Data: #{custom_data}")
+          end
+
+          if !allowed_inbound_ip_addresses.nil?
+            env[:ui].info(" -- Allowed Inbound IP Addresses: #{allowed_inbound_ip_addresses}")
           end
 
           image_publisher, image_offer, image_sku, image_version = vm_image_urn.split(":")
@@ -132,6 +137,7 @@ module VagrantPlugins
             operating_system:               operating_system,
             data_disks:                     config.data_disks,
             custom_data:                    custom_data,
+            allowed_inbound_ip_addresses:   allowed_inbound_ip_addresses,
           }
 
           if operating_system != "Windows"
